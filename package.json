@@ -1,0 +1,9 @@
+{
+  "name": "timer-trink-app",
+  "version": "1.0.0",
+  "description": "Multi-language focus timer app",
+  "main": "index.js",
+  "scripts": {
+    "start": "echo ready"
+  }
+}
