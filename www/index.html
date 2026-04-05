@@ -1,18 +1,179 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Timer Trink</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timer Trink</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: #0f172a;
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+input {
+  width: 60px;
+  padding: 10px;
+  margin: 5px;
+  font-size: 18px;
+  text-align: center;
+}
+
+button {
+  padding: 10px 15px;
+  margin: 5px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background: #22c55e;
+  color: white;
+}
+
+button:hover {
+  background: #16a34a;
+}
+
+.tab {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+#alarmOverlay {
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background: rgba(0,0,0,0.9);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  font-size:24px;
+}
+
+.hidden {
+  display:none;
+}
+</style>
 </head>
+
 <body>
-  <h1>Timer Trink</h1>
 
-  <div id="timerDisplay">00:00:00</div>
+<div class="container">
 
-  <button id="startBtn">Start</button>
-  <button id="pauseBtn">Pause</button>
-  <button id="resetBtn">Reset</button>
+<h1 data-i18n="timer">Timer</h1>
 
-  <script src="app.js"></script>
+<!-- LANGUAGE -->
+<select id="langSelect">
+  <option value="en">EN</option>
+  <option value="tr">TR</option>
+  <option value="de">DE</option>
+  <option value="fr">FR</option>
+  <option value="es">ES</option>
+  <option value="ru">RU</option>
+  <option value="ar">AR</option>
+  <option value="it">IT</option>
+  <option value="pt">PT</option>
+  <option value="zh">ZH</option>
+  <option value="hi">HI</option>
+  <option value="ja">JA</option>
+  <option value="ko">KO</option>
+  <option value="nl">NL</option>
+  <option value="pl">PL</option>
+  <option value="uk">UK</option>
+  <option value="id">ID</option>
+  <option value="ms">MS</option>
+</select>
+
+<!-- TABS -->
+<div>
+  <button onclick="switchTab('timer')">Timer</button>
+  <button onclick="switchTab('stopwatch')">Stopwatch</button>
+  <button onclick="switchTab('pomodoro')">Pomodoro</button>
+</div>
+
+<!-- TIMER -->
+<div id="timer" class="tab active">
+
+  <h2 data-i18n="timer"></h2>
+
+  <div>
+    <input id="hours" type="number" placeholder="HH">
+    <input id="minutes" type="number" placeholder="MM">
+    <input id="seconds" type="number" placeholder="SS">
+  </div>
+
+  <h1 id="timerDisplay">00:00:00</h1>
+
+  <button id="startBtn" data-i18n="start"></button>
+  <button id="pauseBtn" data-i18n="pause"></button>
+  <button id="resetBtn" data-i18n="reset"></button>
+
+</div>
+
+<!-- STOPWATCH -->
+<div id="stopwatch" class="tab">
+
+  <h2 data-i18n="stopwatch"></h2>
+
+  <h1 id="stopwatchDisplay">00:00:00</h1>
+
+  <button id="swStart" data-i18n="start"></button>
+  <button id="swPause" data-i18n="pause"></button>
+  <button id="swReset" data-i18n="reset"></button>
+
+</div>
+
+<!-- POMODORO -->
+<div id="pomodoro" class="tab">
+
+  <h2 data-i18n="pomodoro"></h2>
+
+  <div>
+    <input id="pomodoroWork" type="number" value="25"> 
+    <span data-i18n="work"></span>
+
+    <input id="pomodoroBreak" type="number" value="5"> 
+    <span data-i18n="break"></span>
+  </div>
+
+  <button id="pomodoroBtn">Start Pomodoro</button>
+
+</div>
+
+</div>
+
+<!-- ALARM -->
+<div id="alarmOverlay" class="hidden">
+  <div data-i18n="done">Time is up!</div>
+  <button id="alarmClose">OK</button>
+</div>
+
+<script>
+function switchTab(tab) {
+  document.querySelectorAll(".tab").forEach(el => el.classList.remove("active"));
+  document.getElementById(tab).classList.add("active");
+}
+</script>
+
+<!-- APP JS -->
+<script src="app.js"></script>
+
 </body>
 </html>
